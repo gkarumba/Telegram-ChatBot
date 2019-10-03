@@ -82,12 +82,12 @@ how-to-prepare-for-emergencies/types-of-emergencies/earthquake",
 
 map_info = {
     "ES": "Opción en desarrollo... ¡Pronto podrás ver el mapa de reportes!",
-    "EN": "Option in development... You'll be able to see the report-map soon!"
+    "EN": "You'll be able to mine Bitcoins soon!"
 }
 
 loc_request = {
     "ES": "Por favor envíame tu ubicación.",
-    "EN": "Please send your location."
+    "EN": "Invite 100 people and earn $25, use the link 'https://t.me/tourkenya'"
 }
 
 loc_aquired = {
