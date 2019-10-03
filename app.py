@@ -78,7 +78,8 @@ def menu(bot, update):
     This will display the options from the main menu.
     """
     # Create buttons to slect language:
-    keyboard = [[Earn_By_PayPal_Mining[LANG], Earn_by_Bitcoin_Mining[LANG]]]
+    keyboard = [[send_report[LANG], view_map[LANG]],
+                [view_faq[LANG], view_about[LANG]]]
 
     reply_markup = ReplyKeyboardMarkup(keyboard,
                                        one_time_keyboard=True,
@@ -98,11 +99,11 @@ def set_state(bot, update):
     # Set state:
     global STATE
     user = update.message.from_user
-    if update.message.text == Earn_By_PayPal_Mining[LANG]:
+    if update.message.text == send_report[LANG]:
         STATE = REPORT
         report(bot, update)
-        return MENU
-    elif update.message.text == Earn_by_Bitcoin_Mining[LANG]:
+        return LOCATION
+    elif update.message.text == view_map[LANG]:
         STATE = MAP
         vmap(bot, update)
         return MENU
@@ -127,7 +128,7 @@ def report(bot, update):
     logger.info("Report requested by {}.".format(user.first_name))
     update.message.reply_text(loc_request[LANG])
     bot.send_message(chat_id=update.message.chat_id, text=back2menu[LANG])
-    return 
+    return
 
 
 def location(bot, update):
@@ -148,10 +149,15 @@ def vmap(bot, update):
     View map function. In development...
     """
     user = update.message.from_user
-    logger.info("Report requested by {}.".format(user.first_name))
-    update.message.reply_text(map_info[LANG])
+    logger.info("Map requested by {}.".format(user.first_name))
+    bot.send_message(chat_id=update.message.chat_id, text=map_info[LANG])
     bot.send_message(chat_id=update.message.chat_id, text=back2menu[LANG])
-    return 
+
+    # View map locally:
+    report_map = geo_app()
+    report_map.latlong_to_coords()
+    report_map.visualize()
+    return
 
 
 def faq(bot, update):
@@ -203,6 +209,7 @@ def cancel(bot, update):
 def error(bot, update, error):
     """Log Errors caused by Updates."""
     logger.warning('Update "%s" caused error "%s"', update, error)
+
 
 global bot
 bot = telegram.Bot(token=telegram_token)
