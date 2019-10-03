@@ -9,6 +9,7 @@
 # according to the license provided and its conditions.
 # ===============================================================
 from flask import Flask, request
+import telegram
 from telegram.ext import Updater, CommandHandler, MessageHandler, RegexHandler
 from telegram.ext import ConversationHandler, CallbackQueryHandler, Filters
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
