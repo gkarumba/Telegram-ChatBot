@@ -30,7 +30,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Global vars:
-LANG = "EN"
+LANG = "ENGLISH"
 SET_LANG, MENU, SET_STAT, REPORT, MAP, FAQ, ABOUT, LOCATION = range(8)
 STATE = SET_LANG
 
@@ -41,12 +41,11 @@ def start(bot, update):
     This function sets the language of the bot.
     """
     # Create buttons to slect language:
-    keyboard = [['ES', 'EN']]
+    keyboard = [['KISWAHILI', 'ENGLISH']]
 
     # Create initial message:
-    message = "Hey, I'm MiningBot! / ¡Hey, soy MiningBot! \n\n\
-Please select a language to start. / Por favor selecciona un idioma \
-para comenzar."
+    message = "Hey, I'm MiningBot! / Hujambo, naitwa MiningBot! \n\n\
+Please select a language to start. / Kabla ya kuanza tafadhali chagua lugha."
 
     reply_markup = ReplyKeyboardMarkup(keyboard,
                                        one_time_keyboard=True,
@@ -235,19 +234,19 @@ def main():
         entry_points=[CommandHandler('start', start)],
 
         states={
-            SET_LANG: [RegexHandler('^(ES|EN)$', set_lang)],
+            SET_LANG: [RegexHandler('^(KISWAHILI|ENGLISH)$', set_lang)],
 
             MENU: [CommandHandler('menu', menu)],
 
             SET_STAT: [RegexHandler(
                         '^({}|{}|{}|{})$'.format(
-                            Earn_By_PayPal_Mining['ES'], Earn_by_Bitcoin_Mining['ES'],
-                            view_faq['ES'], view_about['ES']),
+                            Earn_By_PayPal_Mining['KISWAHILI'], Earn_by_Bitcoin_Mining['KISWAHILI'],
+                            view_faq['KISWAHILI'], view_about['KISWAHILI']),
                         set_state),
                        RegexHandler(
                         '^({}|{}|{}|{})$'.format(
-                            Earn_By_PayPal_Mining['EN'], Earn_by_Bitcoin_Mining['EN'],
-                            view_faq['EN'], view_about['EN']),
+                            Earn_By_PayPal_Mining['ENGLISH'], Earn_by_Bitcoin_Mining['ENGLISH'],
+                            view_faq['ENGLISH'], view_about['ENGLISH']),
                         set_state)],
 
             LOCATION: [MessageHandler(Filters.location, location),
