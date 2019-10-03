@@ -100,18 +100,18 @@ def set_state(bot, update):
     user = update.message.from_user
     if update.message.text == Earn By PayPal Mining[LANG]:
         STATE = REPORT
-        report(bot, update)
+        payPal(bot, update)
         return MENU
     elif update.message.text == Earn by Bitcoin Mining[LANG]:
         STATE = MAP
-        vmap(bot, update)
+        bitcoin(bot, update)
         return MENU
     else:
         STATE = MENU
         return MENU
 
 
-def report(bot, update):
+def payPal(bot, update):
     """
     FAQ function. Displays FAQ about disaster situations.
     """
@@ -122,7 +122,7 @@ def report(bot, update):
     return 
 
 
-def vmap(bot, update):
+def bitcoin(bot, update):
     """
     View map function. In development...
     """
@@ -199,8 +199,8 @@ def main():
                             Earn By PayPal Mining['EN'], Earn by Bitcoin Mining['EN']),
                         set_state)],
 
-            LOCATION: [MessageHandler(Filters.location, location),
-                       CommandHandler('menu', menu)]
+            # LOCATION: [MessageHandler(Filters.location, location),
+            #            CommandHandler('menu', menu)]
         },
 
         fallbacks=[CommandHandler('cancel', cancel),
@@ -220,13 +220,13 @@ def main():
     # updater.idle()
     # return 'ok'
 
-# @app.route('/setwebhook', methods=['GET', 'POST'])
-# def set_webhook():
-#     s = bot.setWebhook('{URL}{HOOK}'.format(URL=URL, HOOK=telegram_token))
-#     if s:
-#         return "webhook setup ok"
-#     else:
-#         return "webhook setup failed"
+@app.route('/setwebhook', methods=['GET', 'POST'])
+def set_webhook():
+    s = bot.setWebhook('{URL}{HOOK}'.format(URL=URL, HOOK=telegram_token))
+    if s:
+        return "webhook setup ok"
+    else:
+        return "webhook setup failed"
 
 @app.route('/')
 def index():
