@@ -23,14 +23,14 @@ main_menu = {
     "EN": "Please select an option from below:"
 }
 
-send_report = {
+Earn_By_PayPal_Mining = {
     "ES": "Enviar reporte",
-    "EN": "Send report"
+    "EN": "Earn By PayPal Mining"
 }
 
-view_map = {
+Earn_by_Bitcoin_Mining = {
     "ES": "Ver mapa",
-    "EN": "View map"
+    "EN": "Earn by Bitcoin Mining"
 }
 
 view_faq = {
