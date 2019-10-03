@@ -211,7 +211,7 @@ def error(bot, update, error):
 
 app = Flask(__name__)
 
-@app.route('/{}'.format(TOKEN), methods=['POST'])
+@app.route('/{}'.format(telegram_token), methods=['POST'])
 def main():
     """
     Main function.
