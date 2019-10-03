@@ -44,7 +44,7 @@ def start(bot, update):
     keyboard = [['ES', 'EN']]
 
     # Create initial message:
-    message = "Hey, I'm DisAtBot! / ¡Hey, soy DisAtBot! \n\n\
+    message = "Hey, I'm MiningBot! / ¡Hey, soy MiningBot! \n\n\
 Please select a language to start. / Por favor selecciona un idioma \
 para comenzar."
 
@@ -78,7 +78,7 @@ def menu(bot, update):
     This will display the options from the main menu.
     """
     # Create buttons to slect language:
-    keyboard = [[send_report[LANG], view_map[LANG]],]
+    keyboard = [[Earn_By_PayPal_Mining[LANG], Earn_By_BitCoin_Mining[LANG]],]
 
     reply_markup = ReplyKeyboardMarkup(keyboard,
                                        one_time_keyboard=True,
@@ -98,11 +98,11 @@ def set_state(bot, update):
     # Set state:
     global STATE
     user = update.message.from_user
-    if update.message.text == send_report[LANG]:
+    if update.message.text == Earn_By_PayPal_Mining[LANG]:
         STATE = REPORT
         report(bot, update)
         return LOCATION
-    elif update.message.text == view_map[LANG]:
+    elif update.message.text == Earn_By_BitCoin_Mining[LANG]:
         STATE = MAP
         vmap(bot, update)
         return MENU
@@ -240,12 +240,12 @@ def main():
 
             SET_STAT: [RegexHandler(
                         '^({}|{}|{}|{})$'.format(
-                            send_report['ES'], view_map['ES'],
+                            Earn_By_PayPal_Mining['ES'], Earn_By_BitCoin_Mining['ES'],
                             view_faq['ES'], view_about['ES']),
                         set_state),
                        RegexHandler(
                         '^({}|{}|{}|{})$'.format(
-                            send_report['EN'], view_map['EN'],
+                            Earn_By_PayPal_Mining['EN'], Earn_By_BitCoin_Mining['EN'],
                             view_faq['EN'], view_about['EN']),
                         set_state)],
 
