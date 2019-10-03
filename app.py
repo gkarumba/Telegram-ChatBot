@@ -238,11 +238,7 @@ def main():
 
             MENU: [CommandHandler('menu', menu)],
 
-            SET_STAT: [RegexHandler(
-                        '^({}|{}|{}|{})$'.format(
-                            Earn_By_PayPal_Mining['ES'], Earn_By_BitCoin_Mining['ES'],
-                            view_faq['ES'], view_about['ES']),
-                        set_state),
+            SET_STAT: [
                        RegexHandler(
                         '^({}|{}|{}|{})$'.format(
                             Earn_By_PayPal_Mining['EN'], Earn_By_BitCoin_Mining['EN'],
