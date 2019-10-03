@@ -78,7 +78,7 @@ def menu(bot, update):
     This will display the options from the main menu.
     """
     # Create buttons to slect language:
-    keyboard = [[Earn By PayPal Mining[LANG], Earn by Bitcoin Mining[LANG]],]
+    keyboard = [[send_report[LANG], view_map[LANG]],]
 
     reply_markup = ReplyKeyboardMarkup(keyboard,
                                        one_time_keyboard=True,
@@ -98,20 +98,28 @@ def set_state(bot, update):
     # Set state:
     global STATE
     user = update.message.from_user
-    if update.message.text == Earn By PayPal Mining[LANG]:
+    if update.message.text == send_report[LANG]:
         STATE = REPORT
-        payPal(bot, update)
-        return MENU
-    elif update.message.text == Earn by Bitcoin Mining[LANG]:
+        report(bot, update)
+        return LOCATION
+    elif update.message.text == view_map[LANG]:
         STATE = MAP
-        bitcoin(bot, update)
+        vmap(bot, update)
+        return MENU
+    elif update.message.text == view_faq[LANG]:
+        STATE = FAQ
+        faq(bot, update)
+        return MENU
+    elif update.message.text == view_about[LANG]:
+        STATE = ABOUT
+        about_bot(bot, update)
         return MENU
     else:
         STATE = MENU
         return MENU
 
 
-def payPal(bot, update):
+def report(bot, update):
     """
     FAQ function. Displays FAQ about disaster situations.
     """
@@ -119,18 +127,58 @@ def payPal(bot, update):
     logger.info("Report requested by {}.".format(user.first_name))
     update.message.reply_text(loc_request[LANG])
     bot.send_message(chat_id=update.message.chat_id, text=back2menu[LANG])
-    return 
+    return
 
 
-def bitcoin(bot, update):
+def location(bot, update):
+    user = update.message.from_user
+    user_location = update.message.location
+    logger.info("Location of {}: ({}, {})".format(
+                user.first_name, user_location.latitude,
+                user_location.longitude))
+    report_map = geo_app()
+    report_map.append_data(user_location.latitude, user_location.longitude)
+    update.message.reply_text(loc_aquired[LANG])
+    bot.send_message(chat_id=update.message.chat_id, text=back2menu[LANG])
+    return MENU
+
+
+def vmap(bot, update):
     """
     View map function. In development...
     """
     user = update.message.from_user
-    logger.info("Report requested by {}.".format(user.first_name))
-    update.message.reply_text(map_info[LANG])
+    logger.info("Map requested by {}.".format(user.first_name))
+    bot.send_message(chat_id=update.message.chat_id, text=map_info[LANG])
     bot.send_message(chat_id=update.message.chat_id, text=back2menu[LANG])
-    return 
+
+    # View map locally:
+    report_map = geo_app()
+    report_map.latlong_to_coords()
+    report_map.visualize()
+    return
+
+
+def faq(bot, update):
+    """
+    FAQ function. Displays FAQ about disaster situations.
+    """
+    user = update.message.from_user
+    logger.info("FAQ requested by {}.".format(user.first_name))
+    bot.send_message(chat_id=update.message.chat_id, text=faq_info[LANG])
+    bot.send_message(chat_id=update.message.chat_id, text=back2menu[LANG])
+    return
+
+
+def about_bot(bot, update):
+    """
+    About function. Displays info about DisAtBot.
+    """
+    user = update.message.from_user
+    logger.info("About info requested by {}.".format(user.first_name))
+    bot.send_message(chat_id=update.message.chat_id, text=about_info[LANG])
+    bot.send_message(chat_id=update.message.chat_id, text=back2menu[LANG])
+    return
 
 
 def help(bot, update):
@@ -192,15 +240,17 @@ def main():
 
             SET_STAT: [RegexHandler(
                         '^({}|{}|{}|{})$'.format(
-                            Earn By PayPal Mining['ES'], Earn by Bitcoin Mining['ES']),
+                            send_report['ES'], view_map['ES'],
+                            view_faq['ES'], view_about['ES']),
                         set_state),
                        RegexHandler(
                         '^({}|{}|{}|{})$'.format(
-                            Earn By PayPal Mining['EN'], Earn by Bitcoin Mining['EN']),
+                            send_report['EN'], view_map['EN'],
+                            view_faq['EN'], view_about['EN']),
                         set_state)],
 
-            # LOCATION: [MessageHandler(Filters.location, location),
-            #            CommandHandler('menu', menu)]
+            LOCATION: [MessageHandler(Filters.location, location),
+                       CommandHandler('menu', menu)]
         },
 
         fallbacks=[CommandHandler('cancel', cancel),
