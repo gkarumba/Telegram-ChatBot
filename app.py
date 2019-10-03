@@ -78,7 +78,7 @@ def menu(bot, update):
     This will display the options from the main menu.
     """
     # Create buttons to slect language:
-    keyboard = [[Earn By PayPal Mining[LANG], Earn by Bitcoin Mining[LANG]]]
+    keyboard = [[Earn By PayPal Mining[LANG], Earn by Bitcoin Mining[LANG]],]
 
     reply_markup = ReplyKeyboardMarkup(keyboard,
                                        one_time_keyboard=True,
