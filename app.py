@@ -106,14 +106,6 @@ def set_state(bot, update):
         STATE = MAP
         vmap(bot, update)
         return MENU
-    elif update.message.text == view_faq[LANG]:
-        STATE = FAQ
-        faq(bot, update)
-        return MENU
-    elif update.message.text == view_about[LANG]:
-        STATE = ABOUT
-        about_bot(bot, update)
-        return MENU
     else:
         STATE = MENU
         return MENU
@@ -130,54 +122,15 @@ def report(bot, update):
     return 
 
 
-def location(bot, update):
-    user = update.message.from_user
-    user_location = update.message.location
-    logger.info("Location of {}: ({}, {})".format(
-                user.first_name, user_location.latitude,
-                user_location.longitude))
-    report_map = geo_app()
-    report_map.append_data(user_location.latitude, user_location.longitude)
-    update.message.reply_text(loc_aquired[LANG])
-    bot.send_message(chat_id=update.message.chat_id, text=back2menu[LANG])
-    return MENU
-
-
 def vmap(bot, update):
     """
     View map function. In development...
-    """
-   def report(bot, update):
-    """
-    FAQ function. Displays FAQ about disaster situations.
     """
     user = update.message.from_user
     logger.info("Report requested by {}.".format(user.first_name))
     update.message.reply_text(map_info[LANG])
     bot.send_message(chat_id=update.message.chat_id, text=back2menu[LANG])
     return 
-
-
-def faq(bot, update):
-    """
-    FAQ function. Displays FAQ about disaster situations.
-    """
-    user = update.message.from_user
-    logger.info("FAQ requested by {}.".format(user.first_name))
-    bot.send_message(chat_id=update.message.chat_id, text=faq_info[LANG])
-    bot.send_message(chat_id=update.message.chat_id, text=back2menu[LANG])
-    return
-
-
-def about_bot(bot, update):
-    """
-    About function. Displays info about DisAtBot.
-    """
-    user = update.message.from_user
-    logger.info("About info requested by {}.".format(user.first_name))
-    bot.send_message(chat_id=update.message.chat_id, text=about_info[LANG])
-    bot.send_message(chat_id=update.message.chat_id, text=back2menu[LANG])
-    return
 
 
 def help(bot, update):
