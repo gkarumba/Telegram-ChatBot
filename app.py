@@ -44,7 +44,7 @@ def start(bot, update):
     keyboard = [['ES', 'EN']]
 
     # Create initial message:
-    message = "Hey, I'm MiningBot! / ¡Hey, soy MiningBot! \n\n\
+    message = "Hey, I'm DisAtBot! / ¡Hey, soy DisAtBot! \n\n\
 Please select a language to start. / Por favor selecciona un idioma \
 para comenzar."
 
@@ -78,7 +78,7 @@ def menu(bot, update):
     This will display the options from the main menu.
     """
     # Create buttons to slect language:
-    keyboard = [[Earn_By_PayPal_Mining[LANG], Earn_By_BitCoin_Mining[LANG]],]
+    keyboard = [[Earn_By_PayPal_Mining[LANG], Earn_by_Bitcoin_Mining[LANG]]]
 
     reply_markup = ReplyKeyboardMarkup(keyboard,
                                        one_time_keyboard=True,
@@ -101,8 +101,8 @@ def set_state(bot, update):
     if update.message.text == Earn_By_PayPal_Mining[LANG]:
         STATE = REPORT
         report(bot, update)
-        return LOCATION
-    elif update.message.text == Earn_By_BitCoin_Mining[LANG]:
+        return MENU
+    elif update.message.text == Earn_by_Bitcoin_Mining[LANG]:
         STATE = MAP
         vmap(bot, update)
         return MENU
@@ -127,7 +127,7 @@ def report(bot, update):
     logger.info("Report requested by {}.".format(user.first_name))
     update.message.reply_text(loc_request[LANG])
     bot.send_message(chat_id=update.message.chat_id, text=back2menu[LANG])
-    return
+    return 
 
 
 def location(bot, update):
@@ -147,16 +147,15 @@ def vmap(bot, update):
     """
     View map function. In development...
     """
+   def report(bot, update):
+    """
+    FAQ function. Displays FAQ about disaster situations.
+    """
     user = update.message.from_user
-    logger.info("Map requested by {}.".format(user.first_name))
-    bot.send_message(chat_id=update.message.chat_id, text=map_info[LANG])
+    logger.info("Report requested by {}.".format(user.first_name))
+    update.message.reply_text(map_info[LANG])
     bot.send_message(chat_id=update.message.chat_id, text=back2menu[LANG])
-
-    # View map locally:
-    report_map = geo_app()
-    report_map.latlong_to_coords()
-    report_map.visualize()
-    return
+    return 
 
 
 def faq(bot, update):
@@ -238,9 +237,13 @@ def main():
 
             MENU: [CommandHandler('menu', menu)],
 
-            SET_STAT: [
+            SET_STAT: [RegexHandler(
+                        '^({}|{}|{}|{})$'.format(
+                            Earn_By_PayPal_Mining['ES'], Earn_by_Bitcoin_Mining['ES']),
+                        set_state),
                        RegexHandler(
-                        '^({}|{}|{}|{})$'.format(Earn_By_PayPal_Mining['EN'], Earn_By_BitCoin_Mining['EN'],view_faq['EN'], view_about['EN']),
+                        '^({}|{}|{}|{})$'.format(
+                            Earn_By_PayPal_Mining['EN'], Earn_by_Bitcoin_Mining['EN']),
                         set_state)],
 
             LOCATION: [MessageHandler(Filters.location, location),
