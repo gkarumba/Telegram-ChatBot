@@ -12,6 +12,6 @@
 
 # Telegram credentials:
 telegram_token = '852762164:AAHwLOf0LH0DwVpE2SqLwtQDi_mLlDcgkMM'
-
+URL = 'https://tgrampaypalbot.herokuapp.com/'
 # Google Maps credentials:
 maps_token = 'AIzaSyCeFEqaXj_7P1xeCcV3zC2h1ldJ9GEj4GA'

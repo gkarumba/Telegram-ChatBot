@@ -209,6 +209,9 @@ def error(bot, update, error):
     """Log Errors caused by Updates."""
     logger.warning('Update "%s" caused error "%s"', update, error)
 
+global bot
+bot = telegram.Bot(token=telegram_token)
+
 app = Flask(__name__)
 
 @app.route('/{}'.format(telegram_token), methods=['POST'])
@@ -268,7 +271,7 @@ def main():
 
 @app.route('/setwebhook', methods=['GET', 'POST'])
 def set_webhook():
-    s = bot.setWebhook('{URL}{HOOK}'.format(URL=URL, HOOK=TOKEN))
+    s = bot.setWebhook('{URL}{HOOK}'.format(URL=URL, HOOK=telegram_token))
     if s:
         return "webhook setup ok"
     else:
