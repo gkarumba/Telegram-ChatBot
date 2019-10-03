@@ -269,6 +269,7 @@ def main():
     # Run the bot until the user presses Ctrl-C or the process
     # receives SIGINT, SIGTERM or SIGABRT:
     # updater.idle()
+    return 'ok'
 
 @app.route('/setwebhook', methods=['GET', 'POST'])
 def set_webhook():
