@@ -34,8 +34,6 @@ LANG = "EN"
 SET_LANG, MENU, SET_STAT, REPORT, MAP, FAQ, ABOUT, LOCATION = range(8)
 STATE = SET_LANG
 
-global Earn_By_PayPal_Mining
-global Earn_By_BitCoin_Mining
 
 def start(bot, update):
     """
