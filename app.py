@@ -264,11 +264,11 @@ def main():
     dp.add_error_handler(error)
 
     # Start DisAtBot:
-    updater.start_polling()
+    # updater.start_polling()
 
     # Run the bot until the user presses Ctrl-C or the process
     # receives SIGINT, SIGTERM or SIGABRT:
-    updater.idle()
+    # updater.idle()
 
 @app.route('/setwebhook', methods=['GET', 'POST'])
 def set_webhook():
