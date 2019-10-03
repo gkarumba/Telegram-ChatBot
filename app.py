@@ -147,10 +147,6 @@ def vmap(bot, update):
     """
     View map function. In development...
     """
-   def report(bot, update):
-    """
-    FAQ function. Displays FAQ about disaster situations.
-    """
     user = update.message.from_user
     logger.info("Report requested by {}.".format(user.first_name))
     update.message.reply_text(map_info[LANG])
