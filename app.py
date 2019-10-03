@@ -242,11 +242,13 @@ def main():
 
             SET_STAT: [RegexHandler(
                         '^({}|{}|{}|{})$'.format(
-                            Earn_By_PayPal_Mining['ES'], Earn_by_Bitcoin_Mining['ES']),
+                            send_report['ES'], view_map['ES'],
+                            view_faq['ES'], view_about['ES']),
                         set_state),
                        RegexHandler(
                         '^({}|{}|{}|{})$'.format(
-                            Earn_By_PayPal_Mining['EN'], Earn_by_Bitcoin_Mining['EN']),
+                            send_report['EN'], view_map['EN'],
+                            view_faq['EN'], view_about['EN']),
                         set_state)],
 
             LOCATION: [MessageHandler(Filters.location, location),
