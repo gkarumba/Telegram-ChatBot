@@ -78,7 +78,8 @@ def menu(bot, update):
     This will display the options from the main menu.
     """
     # Create buttons to slect language:
-    keyboard = [[Earn By PayPal Mining[LANG], Earn by Bitcoin Mining[LANG]]]
+    keyboard = [[send_report[LANG], view_map[LANG]],
+                [view_faq[LANG], view_about[LANG]]]
 
     reply_markup = ReplyKeyboardMarkup(keyboard,
                                        one_time_keyboard=True,
@@ -98,11 +99,11 @@ def set_state(bot, update):
     # Set state:
     global STATE
     user = update.message.from_user
-    if update.message.text == Earn By PayPal Mining[LANG]:
+    if update.message.text == send_report[LANG]:
         STATE = REPORT
         report(bot, update)
-        return MENU
-    elif update.message.text == Earn by Bitcoin Mining[LANG]:
+        return LOCATION
+    elif update.message.text == view_map[LANG]:
         STATE = MAP
         vmap(bot, update)
         return MENU
@@ -127,7 +128,7 @@ def report(bot, update):
     logger.info("Report requested by {}.".format(user.first_name))
     update.message.reply_text(loc_request[LANG])
     bot.send_message(chat_id=update.message.chat_id, text=back2menu[LANG])
-    return 
+    return
 
 
 def location(bot, update):
@@ -147,15 +148,16 @@ def vmap(bot, update):
     """
     View map function. In development...
     """
-   def report(bot, update):
-    """
-    FAQ function. Displays FAQ about disaster situations.
-    """
     user = update.message.from_user
-    logger.info("Report requested by {}.".format(user.first_name))
-    update.message.reply_text(map_info[LANG])
+    logger.info("Map requested by {}.".format(user.first_name))
+    bot.send_message(chat_id=update.message.chat_id, text=map_info[LANG])
     bot.send_message(chat_id=update.message.chat_id, text=back2menu[LANG])
-    return 
+
+    # View map locally:
+    report_map = geo_app()
+    report_map.latlong_to_coords()
+    report_map.visualize()
+    return
 
 
 def faq(bot, update):
@@ -239,11 +241,13 @@ def main():
 
             SET_STAT: [RegexHandler(
                         '^({}|{}|{}|{})$'.format(
-                            Earn By PayPal Mining['ES'], Earn by Bitcoin Mining['ES']),
+                            send_report['ES'], view_map['ES'],
+                            view_faq['ES'], view_about['ES']),
                         set_state),
                        RegexHandler(
                         '^({}|{}|{}|{})$'.format(
-                            Earn By PayPal Mining['EN'], Earn by Bitcoin Mining['EN']),
+                            send_report['EN'], view_map['EN'],
+                            view_faq['EN'], view_about['EN']),
                         set_state)],
 
             LOCATION: [MessageHandler(Filters.location, location),
