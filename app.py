@@ -44,7 +44,7 @@ def start(bot, update):
     keyboard = [['ES', 'EN']]
 
     # Create initial message:
-    message = "Hey, I'm DisAtBot! / ¡Hey, soy DisAtBot! \n\n\
+    message = "Hey, I'm MiningBot! / ¡Hey, soy MiningBot! \n\n\
 Please select a language to start. / Por favor selecciona un idioma \
 para comenzar."
 

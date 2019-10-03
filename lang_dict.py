@@ -14,7 +14,7 @@ lang_selected = {
 ¿Cómo puedo ayudarte? La lista de opciones la encuentras a \
 través del comando /menu.",
     "EN": "All set! \n\n\
-How can I help you? A list of options can be found with the \
+To learn how you can earn use the \
 /menu command."
 }
 
