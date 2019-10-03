@@ -240,9 +240,7 @@ def main():
 
             SET_STAT: [
                        RegexHandler(
-                        '^({}|{}|{}|{})$'.format(
-                            Earn_By_PayPal_Mining['EN'], Earn_By_BitCoin_Mining['EN'],
-                            view_faq['EN'], view_about['EN']),
+                        '^({}|{}|{}|{})$'.format(Earn_By_PayPal_Mining['EN'], Earn_By_BitCoin_Mining['EN'],view_faq['EN'], view_about['EN']),
                         set_state)],
 
             LOCATION: [MessageHandler(Filters.location, location),
