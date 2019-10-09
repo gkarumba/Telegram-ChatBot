@@ -14,4 +14,4 @@
 telegram_token = 'Your API TOKEN'
 URL = 'https://tgrampaypalbot.herokuapp.com/'
 # Google Maps credentials:
-maps_token = 'AIzaSyCeFEqaXj_7P1xeCcV3zC2h1ldJ9GEj4GA'
+maps_token = 'Your maps token'
